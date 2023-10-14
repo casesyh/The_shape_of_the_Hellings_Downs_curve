@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>On the shape of the Hellings-Downs curve</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="Styles/big002/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="Styles/big002/css/big002.css"/>
+<link rel="stylesheet" type="text/css" href="Styles/big002/css/hideshow.css"/>
+<script type="text/javascript" src="Styles/big002/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="Styles/big002/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="Styles/big002/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="Styles/big002/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="Styles/big002/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="Styles/big002/js/big002.js"></script>
+<script type="text/javascript" src="Styles/big002/js/hideshow.js"></script>
+<script type="text/javascript" src="Styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">On the shape of the Hellings-Downs curve
+<br />
+<span class="subtitle">Yuhao  <br> CERCA Talk</span>
+</h1>
+
+<div id="outline-container-orgda37412" class="outline-2">
+<h2 id="orgda37412">Introduction: the Hellings-Downs curve and the Nanograv experiment</h2>
+<div class="outline-text-2" id="text-orgda37412">
+</div>
+<div id="outline-container-orgea07e15" class="outline-3">
+<h3 id="orgea07e15">Reference for the intro section</h3>
+<div class="outline-text-3" id="text-orgea07e15">
+<ul class="org-ul">
+<li>Bruce Allen, "Will Pulsar Timing Arrays observe the Hellings and Downs curve?", Frascati Physics Series Vol. 74 (2022)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3f2e5cb" class="outline-3">
+<h3 id="org3f2e5cb">The Nanograv experiment</h3>
+<div class="outline-text-3" id="text-org3f2e5cb">
+<ul class="org-ul">
+<li>Use Pulsar Timing Arrays to detect the stachastic GW background.</li>
+<li><p>
+The goal is the reproduce the Hellings-Downs curve through PTAs.
+</p>
+
+
+<div id="orgc082b9c" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/cartoon_PTA.png" alt="cartoon_PTA.png" width="100%" />
+</p>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd203f3a" class="outline-3">
+<h3 id="orgd203f3a">The redshift</h3>
+<div class="outline-text-3" id="text-orgd203f3a">
+<ul class="org-ul">
+<li>The data stream from each pulsar is a redshift \(z = \Delta f/f\)</li>
+<li>Expected redshift of a pulsar signal induced by a GW</li>
+</ul>
+
+
+<div id="orgd757fb1" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/GW_induced_redshift_of_pulsar.png" alt="GW_induced_redshift_of_pulsar.png" width="100%" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Redshift/blueshift of a pulsar signal induced by GW that oscillates through three cycles with an oscillation period of five years</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgac1b272" class="outline-3">
+<h3 id="orgac1b272">The Hellings-Downs curve</h3>
+<div class="outline-text-3" id="text-orgac1b272">
+</div>
+<div id="outline-container-orgbcfea09" class="outline-4">
+<h4 id="orgbcfea09">Steps to find the HD curve</h4>
+<div class="outline-text-4" id="text-orgbcfea09">
+<ul class="org-ul">
+<li>Place a single distant unit-amplitude unpolarized GW source at a point in the sky.</li>
+<li>Write down the correlation between the redshifts of two pulsars separated by angle \(\gamma\).</li>
+<li>Average the correlation over all pairs of pulsars separated by angle \(\gamma\), assuming that these were uniformly distributed around the sky.</li>
+<li>To to the last step, the pulsar positions are fixed and average is taken over source directions on the celestial sphere, which is equivalent to the last step from symmetry.</li>
+</ul>
+
+
+<div id="orgcdd5862" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/The_HD_curve.png" alt="The_HD_curve.png" width="100%" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46176a4" class="outline-4">
+<h4 id="org46176a4">Question</h4>
+<div class="outline-text-4" id="text-org46176a4">
+<ul class="org-ul">
+<li>Why is the HD curve asymmetric?</li>
+</ul>
+
+
+
+
+<p>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org2e11ec5" class="outline-2">
+<h2 id="org2e11ec5">The analogy of HD curves in sound and E&amp;M waves</h2>
+<div class="outline-text-2" id="text-org2e11ec5">
+</div>
+<div id="outline-container-orgcf363b7" class="outline-3">
+<h3 id="orgcf363b7">Reference for this section</h3>
+<div class="outline-text-3" id="text-orgcf363b7">
+<ul class="org-ul">
+<li>Fredrick A. Jenet, Joseph D. Romano, "Understanding the gravitational-wave Hellings and Downs curve for pulsar timing arrays in terms of sound and electromagnetic waves", Am. J. Phys. 83, 635 (2015)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org83c7ae9" class="outline-3">
+<h3 id="org83c7ae9">The setups and signals</h3>
+<div class="outline-text-3" id="text-org83c7ae9">
+<ul class="org-ul">
+<li>Setup for sound wave system</li>
+</ul>
+
+
+<div id="org25a0919" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/setup_for_sound_wave_system.png" alt="setup_for_sound_wave_system.png" width="100%" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Setup for E&amp;M wave system</li>
+</ul>
+
+
+<div id="org5cff1c1" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/setup_for_e&amp;m_wave_system.png" alt="setup_for_e&amp;m_wave_system.png" width="100%" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li><p>
+Signal
+</p>
+
+\begin{align}
+ r_1 &= V_A - V_B \\
+ r_2 &= V_A - V_C
+\end{align}</li>
+
+<li>The correlated response is \(\langle r_1(t) r_2(t) \rangle\)</li>
+
+<li>The analogy for the H-D curve:
+
+<ol class="org-ol">
+<li>For the sound wave \(\langle r_1 r_2 \rangle \simeq G^2 \langle p^2 \rangle\), where \(G\) is the gain, \(p\) is the pressure.</li>
+
+<li>For the E&amp;M wave \(\langle r_1 r_2 \rangle \simeq \frac{1}{3} \cos \zeta \langle E^2 \rangle\)</li>
+</ol></li>
+</ul>
+
+
+<ul class="org-ul">
+<li>They are actually both symmetric.</li>
+</ul>
+
+
+<p>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org73913aa" class="outline-2">
+<h2 id="org73913aa">Compare the symmetric cases for sound waves and E&amp;M waves with the asymmetric case for GW</h2>
+<div class="outline-text-2" id="text-org73913aa">
+</div>
+<div id="outline-container-orgde1ad96" class="outline-3">
+<h3 id="orgde1ad96">Reference for the section</h3>
+<div class="outline-text-3" id="text-orgde1ad96">
+<p>
+M. Anholm, S. Ballmer, J. D. E. Creighton, L. R. Price, and X. Siemens, Optimal strategies for gravitational wave stochastic background searches in pulsar timing data, Phys. Rev. D 79, 084030 (2009).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org252b210" class="outline-3">
+<h3 id="org252b210">Derive the Hellings-Downs curve</h3>
+<div class="outline-text-3" id="text-org252b210">
+<ul class="org-ul">
+<li>The expression for the redshift is</li>
+</ul>
+
+
+\begin{align}
+  z(t) &= \frac{\nu_0 - \nu_t}{\nu_0} = \sum_{(i)}^N \frac{1}{2}\frac{\widehat{p}^i\widehat{p}^j}{1 + \widehat{\Omega}_{(i)} \cdot \widehat{p} } \Delta h_{ij}(t - \widehat{\Omega}_{(i)}\cdot \overrightarrow{x})\\
+    & = \int d \widehat{\Omega} \,z(t, \widehat{\Omega})
+ \end{align}
+
+<p>
+where, \(i,j = x, y, z\),  and \(\widehat{p}\) is the unit vector pointing from the solar system barycenter to the pulsar, \(\widehat{\Omega}_{(i)}\) is the unit vector in the propagation direction of the gravitational wave.
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<ul class="org-ul">
+<li><p>
+For the average of the product of red shifts in the signals from two pulsars 1 and 2 in frequency domain,
+</p>
+
+\begin{align}
+<\widetilde{z}_1^*(f)\widetilde{z}_2(f)> &\propto \Gamma \times |f|^{-3} \nonumber \\ & \times [\textrm{quantity related to gravitational wave energy density and some other stuff}] 
+\end{align}
+<p>
+where,
+</p>
+\begin{align}
+\Gamma = \frac{1}{4} \beta \sum_{A = +, \times}\int d \widehat{\Omega} \frac{\widehat{p}_1^i\widehat{p}_1^j}{1 + \widehat{\Omega}\cdot \widehat{p}_1}  \frac{\widehat{p}_2^k\widehat{p}_2^l}{1 + \widehat{\Omega}\cdot \widehat{p}_2} e^A_{ij}(\widehat{\Omega})e^A_{kl}(\widehat{\Omega})
+\end{align}</li>
+</ul>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<ul class="org-ul">
+<li><p>
+How to do the integration?
+</p>
+
+<p>
+If \(\widehat{\Omega} = (\sin \theta \cos \phi, \sin \theta \sin \phi, \cos \theta)\), then 
+</p>
+
+\begin{align}
+e_{ij}^+(\widehat{\Omega}) &= \widehat{m}_i\widehat{m}_j - \widehat{n}_i\widehat{n}_j \\
+e_{ij}^\times (\widehat{\Omega}) &= \widehat{m}_i\widehat{n}_j + \widehat{n}_i\widehat{m}_j 
+\end{align}
+<p>
+where,
+</p>
+\begin{align}
+&\widehat{m} = (\sin \phi, \cos \phi, 0)\\
+&\widehat{n} = (\cos \theta \cos \phi, \cos \theta \sin \phi, - \sin \theta)
+\end{align}
+
+<p>
+Assume the direction of pulsar 1 is along the z-axis, and the angle between the direction of pulsar 1 and the direction of pulsar 2 is \(\xi\), then
+</p>
+\begin{align}
+&\widehat{p}_1 = (0, 0, 1)\\
+&\widehat{p}_2 = (\sin \xi, 0, \cos \xi)
+\end{align}
+
+<p>
+Put the expressions together, then
+</p>
+\begin{align}
+&\Gamma = \nonumber\\ & - \frac{1}{4}\beta \int d \widehat{\Omega} \frac{\sin ^2\theta (\sin^2 \xi \sin^2 \phi - \sin^2 \xi \cos^2 \theta \sin^2 \phi - \cos^2 \xi \sin^2 \theta + 2 \sin \xi \cos \xi \sin \theta \cos \theta \cos \phi)}{(1 + \cos \theta) (1 + \cos \xi \cos \theta \sin \xi \sin \theta \cos \phi) }
+\end{align}</li>
+
+<li><p>
+The result of the integral is proportional to the Hellings-Downs curve
+</p>
+
+\begin{align}
+\Gamma = \frac{4 \pi}{3} \beta \left\{1 + \frac{3}{2} (1 - \cos \xi) \left[ \ln \left( \frac{1 - \cos \xi}{2} - \frac{1}{6}\right)\right]\right\}
+\end{align}
+
+<p>
+where \(\beta\) is the normalization factor
+</p></li>
+</ul>
+
+
+
+
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgba9e3d6" class="outline-3">
+<h3 id="orgba9e3d6">The intuition for the asymmetric shape</h3>
+<div class="outline-text-3" id="text-orgba9e3d6">
+<ul class="org-ul">
+<li>Compared to \(r_1\) and \(r_2\) in the sound waves and E&amp;M waves, the redshift is  a ratio instead of a difference between two quantities</li>
+</ul>
+
+
+<ul class="org-ul">
+<li>Mathematically, the term \(1 + \widehat{\Omega}_{(i)} \cdot \widehat{p}\) in the denominators would intuitively cause the asymmetry</li>
+</ul>
+
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org871f85d" class="outline-2">
+<h2 id="org871f85d">Will PTAs(Pulsar Timing Arrays) observe the Hellings-Downs curve?</h2>
+<div class="outline-text-2" id="text-org871f85d">
+</div>
+<div id="outline-container-orgc3b241c" class="outline-3">
+<h3 id="orgc3b241c">References</h3>
+<div class="outline-text-3" id="text-orgc3b241c">
+<ul class="org-ul">
+<li>Bruce Allen, Will Pulsar Timing Arrays observe the Hellings and Downs curve?, Frascati Physics Series Vol. 74 (2022)</li>
+<li>B. Allen, Variance of the Hellings-Downs correlation, Phys. Rev. D 107, 043018 (2023)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org70a68bb" class="outline-3">
+<h3 id="org70a68bb">The antenna pattern function</h3>
+<div class="outline-text-3" id="text-org70a68bb">
+\begin{align}
+F^A(\boldsymbol{\Omega}) = \frac{1}{2} \frac{\boldsymbol{p}^a \boldsymbol {p}^b}{1 + \boldsymbol{\Omega}\cdot\boldsymbol{p}} e^A_{ab}(\boldsymbol{\Omega})
+\end{align}
+
+<p>
+where \(\boldsymbol{p}\) is a unit-length spatial vector pointing from Earth to pulsar, the gravitational wave travels in the direction \(\boldsymbol{\Omega}\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3445cbf" class="outline-3">
+<h3 id="org3445cbf">The correlation between signals from two pulsars</h3>
+<div class="outline-text-3" id="text-org3445cbf">
+\begin{align}
+\rho = F_1^+(\boldsymbol{\Omega}) F_2^+(\boldsymbol{\Omega}) + F_1^\times(\boldsymbol{\Omega}) F_2^\times(\boldsymbol{\Omega})
+\end{align}
+</div>
+</div>
+
+
+<div id="outline-container-org7f78762" class="outline-3">
+<h3 id="org7f78762">Define uniform average over directions</h3>
+<div class="outline-text-3" id="text-org7f78762">
+<p>
+For any function \(Q(\boldsymbol{\Omega})\),
+</p>
+
+\begin{align}
+\langle Q(\boldsymbol{\Omega}) \rangle & = \frac{1}{4 \pi} \int d \boldsymbol{\Omega} Q(\boldsymbol{\Omega}) \\
+& = \frac{1}{4 \pi} \int_0^\pi \sin \theta d \theta \int_0^{2\pi} d \phi\,Q(\theta, \phi)
+\end{align}
+</div>
+</div>
+
+<div id="outline-container-org599ef30" class="outline-3">
+<h3 id="org599ef30">Correlation average for single gravitational wave source, the Hellings-Downs curve</h3>
+<div class="outline-text-3" id="text-org599ef30">
+\begin{align}
+\mu_{u}(\gamma) = \langle \rho \rangle
+\end{align}
+
+<ul class="org-ul">
+<li>Observational average can be directly compared to \(h^2 \mu_{u}(\gamma)\), where \(h^2\) is the characteristic squared amplitude of the gravitational waves.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1b0804d" class="outline-3">
+<h3 id="org1b0804d">Correlation average for two gravitational wave sources</h3>
+<div class="outline-text-3" id="text-org1b0804d">
+<ul class="org-ul">
+<li>The responses \(Z_a\) and \(Z_b\) from two pulsars \(a\) and \(b\) for two gravitational wave sources \(\Omega_1\) and \(\Omega_2\) ,</li>
+</ul>
+\begin{align}
+& Z_a = \mathscr{R} (h_1 F_a(\Omega_1) + h_2 F_a(\Omega_2))\\
+& Z_b = \mathscr{R} (h_1 F_b(\Omega_1) + h_2 F_b(\Omega_2))
+\end{align}
+<p>
+Here, \(h = h^+ + i h^\times\), where \(h^+\) and \(h^\times\) are the components in the two different polarizations.
+</p>
+
+<ul class="org-ul">
+<li>The average over direction</li>
+</ul>
+
+\begin{equation}
+\label{orga18bba6}
+\begin{aligned}
+  \rho = \overline{Z_a Z_b} & = \frac{1}{2} \overline{|h_1|^2} \mathscr{R}(F_a(\Omega_1) F_b^*(\Omega_1)) + \frac{1}{2} \overline{|h_2|^2} \mathscr{R}(F_a(\Omega_2) F_b^*(\Omega_2)) \\
+ & + \frac{1}{2} \overline{h_1 h_2^*} \mathscr{R}(F_a(\Omega_1) F_b^*(\Omega_2) + F_a(\Omega_2) F_b^*(\Omega_1))
+ \end{aligned}
+ \end{equation}
+
+<ul class="org-ul">
+<li>When the two gravitational wave sources are not coherent, there is no interference between the gravitational wave sources</li>
+</ul>
+
+
+\begin{equation}
+ \overline{h_1 h_2^*} = 0
+\end{equation}
+
+<p>
+\(\rho\) recovers the Hellings-Downs curve.
+</p>
+
+
+<ul class="org-ul">
+<li><p>
+When the two gravitational wave sources are coherent, \(\overline{h_1 h_2^*} \neq 0\), the so-called two-point function is shown in the plot below 
+</p>
+
+
+<div id="org871852e" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/two_point_function.png" alt="two_point_function.png" width="100%" />
+</p>
+</div>
+
+<p>
+We can see that if the angle between the two sources \(\beta = 0\), it reduces to the Hellings-Downs curve.
+</p></li>
+</ul>
+
+
+<ul class="org-ul">
+<li><p>
+When average over sources with independent inter-source angles uniformly distributed on the sky, the so-called cosmic variance
+</p>
+
+\begin{align}
+\sigma_{\mathrm{cosmic}} = \langle \rho - \langle \rho^2 \rangle \rangle = \int_0^{\pi} d \beta\,\mu(\gamma, \beta)
+\end{align}</li>
+</ul>
+
+
+
+
+<div id="org492082b" class="figure">
+<p><img src="./figures/20230922_the_shape_of_Hellings_Downs_curve/cosmic_variance.png" alt="cosmic_variance.png" width="100%" />
+</p>
+</div>
+
+
+
+<ul class="org-ul">
+<li>Conclusion: PTAs wouldn't see the exact Hellings-Downs curve but close. The difference depends on the scale of the cosmic variance</li>
+</ul>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+
+<p>
+ <br>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6ff6da0" class="outline-2">
+<h2 id="org6ff6da0">Thanks for you attention</h2>
+<div class="outline-text-2" id="text-org6ff6da0">
+
+<div id="orgbc95892" class="figure">
+<p><img src="./figures/Thank_you.jpeg" alt="Thank_you.jpeg" width="70%" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
